@@ -41,6 +41,14 @@ var serveCommand = &cli.Command{
 func serve(c *cli.Context) error {
 
 	// Create an http client.
+	client := newClient()
+
+	eventList := &commerce.EventList{}
+
+	_, err := post(client, eventList)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

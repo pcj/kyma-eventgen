@@ -26,6 +26,41 @@ go_rules_dependencies()
 go_register_toolchains()
 
 # ===============================================================
+# java protobuf / grpc
+# ===============================================================
+
+load("@build_stack_rules_proto//:deps.bzl", "io_grpc_grpc_java")
+
+io_grpc_grpc_java()
+
+load("@io_grpc_grpc_java//:repositories.bzl", "grpc_java_repositories")
+
+grpc_java_repositories(omit_com_google_protobuf = True)
+
+load("@build_stack_rules_proto//java:deps.bzl", "java_grpc_library")
+
+java_grpc_library()
+
+# ===============================================================
+# node
+# ===============================================================
+
+load("@build_stack_rules_proto//node:deps.bzl", "node_proto_library")
+
+node_proto_library()
+
+load("@org_pubref_rules_node//node:rules.bzl", "node_repositories", "yarn_modules")
+
+node_repositories()
+
+yarn_modules(
+    name = "proto_node_modules",
+    deps = {
+        "google-protobuf": "3.6.1",
+    },
+)
+
+# ===============================================================
 # bazel_gazelle
 # ===============================================================
 

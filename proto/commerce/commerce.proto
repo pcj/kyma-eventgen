@@ -1,9 +1,32 @@
 syntax = "proto3";
 
+option java_package = "github.wdf.sap.pyrite.hackathon";
+option java_outer_classname = "CommerceProtos";
+
 message EventList {
     repeated Event event = 1;
 }
 
 message Event {
-    int32 id = 1;
+
+    enum Type {
+        UNKNOWN = 0;
+        CART_ABANDONED = 1;
+    }
+    
+    Type type = 1;
+
+    CartAbandoned cart_abandoned = 3;
+}
+
+message CartAbandoned {
+
+}
+
+message EventBusMessage {
+    string source_id = 1 [json_name = "source-id"];
+    string event_type = 2 [json_name = "event-type"];
+    string event_type_version = 3 [json_name = "event-type-version"];
+    string event_time = 4 [json_name = "event-type"];
+    Event data = 5;
 }
