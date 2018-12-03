@@ -1,0 +1,24 @@
+java_library(
+    name = "app",
+    srcs = [
+        "EventUtil.java",
+    ],
+    deps = [
+        ":commerce_java_proto",
+        "@com_google_protobuf//:protobuf_java_util",
+        "@com_google_protobuf//:protobuf_java",
+    ],
+)
+
+java_binary(
+    name = "abandon",
+    main_class = "github.wdf.sap.pyrite.hackathon.abandon.EventUtil",
+    runtime_deps = [
+        ":app",
+    ],
+)
+
+java_proto_library(
+    name = "commerce_java_proto",
+    deps = ["//proto/commerce:commerce_proto"],
+)
