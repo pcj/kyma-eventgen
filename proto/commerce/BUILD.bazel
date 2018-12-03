@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "commerce_proto",
+    srcs = ["commerce.proto"],
+)
+
+go_proto_library(
+    name = "commerce_go_proto_library",
+    importpath = "github.wdf.sap.corp/team-pyrite/hackathon/proto/commerce",
+    proto = ":commerce_proto",
+    visibility = ["//visibility:public"],
+)
+
